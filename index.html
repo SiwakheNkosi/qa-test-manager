@@ -1,0 +1,88 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>QA Test Case Manager</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <header>
+      <h1>QA Test Case Manager</h1>
+      <p>Manage and track your software test cases</p>
+    </header>
+
+    <main>
+      <button id="addTestBtn">+ Add Test Case</button>
+
+      <section id="testForm" class="test-form">
+        <h2>Add Test Case</h2>
+
+        <input type="text" id="testName" placeholder="Test case name" />
+
+        <textarea
+          id="testDescription"
+          placeholder="Test case description"
+        ></textarea>
+
+        <select id="testStatus">
+          <option value="Pass">Pass</option>
+          <option value="Fail">Fail</option>
+          <option value="Blocked">Blocked</option>
+        </select>
+
+        <select id="testPriority">
+          <option value="Low">Low</option>
+          <option value="Medium">Medium</option>
+          <option value="High">High</option>
+        </select>
+
+        <button id="saveTestBtn">Save Test Case</button>
+      </section>
+
+      <section class="statistics">
+        <div>
+          <h2 id="totalTests">0</h2>
+          <p>Total Tests</p>
+        </div>
+
+        <div>
+          <h2 id="passedTests">0</h2>
+          <p>Passed</p>
+        </div>
+
+        <div>
+          <h2 id="failedTests">0</h2>
+          <p>Failed</p>
+        </div>
+
+        <div>
+          <h2 id="blockedTests">0</h2>
+          <p>Blocked</p>
+        </div>
+      </section>
+
+      <section class="controls">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search test cases..."
+        />
+        <select id="statusFilter">
+          <option value="all">All Status</option>
+          <option value="pass">Passed</option>
+          <option value="fail">Failed</option>
+          <option value="blocked">Blocked</option>
+        </select>
+      </section>
+
+      <section id="testCases"></section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
