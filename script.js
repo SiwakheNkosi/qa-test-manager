@@ -32,20 +32,27 @@ const testCases = [
   },
 ];
 
-const testCaseContainer = document.querySelector("#testCases");
+function displayTestCases() {
+  const testCaseContainer = document.querySelector("#testCases");
 
-testCases.forEach(function (testCase) {
-  const testCaseElement = document.createElement("div");
-  testCaseElement.classList.add("test-case");
-  testCaseElement.innerHTML = `
-    <h2>${testCase.id} - ${testCase.name}</h2>
-    <p>${testCase.description}</p>
-    <p>Status: ${testCase.status}</p>
-    <p>Priority: ${testCase.priority}</p>
-    `;
+  testCaseContainer.innerHTML = "";
 
-  testCaseContainer.appendChild(testCaseElement);
-});
+  testCases.forEach(function (testCase) {
+    const testCaseElement = document.createElement("div");
+
+    testCaseElement.classList.add("test-case");
+
+    testCaseElement.innerHTML = `
+            <h2>${testCase.id} - ${testCase.name}</h2>
+            <p>${testCase.description}</p>
+            <p>Status: ${testCase.status}</p>
+            <p>Priority: ${testCase.priority}</p>
+        `;
+
+    testCaseContainer.appendChild(testCaseElement);
+  });
+}
+displayTestCases();
 
 const saveTestBtn = document.querySelector("#saveTestBtn");
 
@@ -55,8 +62,17 @@ saveTestBtn.addEventListener("click", function () {
   const testStatus = document.querySelector("#testStatus").value;
   const testPriority = document.querySelector("#testPriority").value;
 
-  console.log(testName);
-  console.log(testDescription);
-  console.log(testStatus);
-  console.log(testPriority);
+  const newTestCase = {
+    id: `TC00${testCases.length + 1}`,
+    name: testName,
+    description: testDescription,
+    status: testStatus,
+    priority: testPriority,
+  };
+
+  testCases.push(newTestCase);
+  displayTestCases();
+  testForm.style.display = "none";
+
+  console.log(testCases);
 });
