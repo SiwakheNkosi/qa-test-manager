@@ -47,9 +47,28 @@ function displayTestCases() {
             <p>${testCase.description}</p>
             <p>Status: ${testCase.status}</p>
             <p>Priority: ${testCase.priority}</p>
+
+            <button class="delete-btn" data-id ="${testCase.id}"> Delete </button>
         `;
 
     testCaseContainer.appendChild(testCaseElement);
+  });
+  const deleteButtons = document.querySelectorAll(".delete-btn");
+
+  deleteButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      const testId = button.dataset.id;
+
+      const updatedTestCases = testCases.filter(function (testCase) {
+        return testCase.id !== testId;
+      });
+
+      testCases.length = 0;
+
+      testCases.push(...updatedTestCases);
+
+      displayTestCases();
+    });
   });
 }
 displayTestCases();
