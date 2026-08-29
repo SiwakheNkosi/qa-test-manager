@@ -21,7 +21,6 @@ const testCases = [
     status: "Pass",
     priority: "High",
   },
-
   {
     id: "TC002",
     name: "Login with incorrect password",
@@ -30,7 +29,6 @@ const testCases = [
     status: "Fail",
     priority: "High",
   },
-
   {
     id: "TC003",
     name: "Forgot password",
@@ -63,6 +61,29 @@ function displayTestCases() {
 
     testCaseContainer.appendChild(testCaseElement);
   });
+
+  function updateStatistics() {
+    const total = testCases.length;
+
+    const passed = testCases.filter(function (testCase) {
+      return testCase.status === "Pass";
+    }).length;
+
+    const failed = testCases.filter(function (testCase) {
+      return testCase.status === "Fail";
+    }).length;
+
+    const blocked = testCases.filter(function (testCase) {
+      return testCase.status === "Blocked";
+    }).length;
+
+    document.querySelector("#totalTests").textContent = total;
+    document.querySelector("#passedTests").textContent = passed;
+    document.querySelector("#failedTests").textContent = failed;
+    document.querySelector("#blockedTests").textContent = blocked;
+  }
+  updateStatistics();
+
   const editButtons = document.querySelectorAll(".edit-btn");
 
   editButtons.forEach(function (button) {
@@ -138,6 +159,4 @@ saveTestBtn.addEventListener("click", function () {
   testCases.push(newTestCase);
   displayTestCases();
   testForm.style.display = "none";
-
-  console.log(testCases);
 });
