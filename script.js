@@ -1,7 +1,15 @@
+let editingTestId = null;
 const addTestBtn = document.querySelector("#addTestBtn");
 const testForm = document.querySelector("#testForm");
 
 addTestBtn.addEventListener("click", function () {
+  editingTestId = null;
+
+  document.querySelector("#testName").value = "";
+  document.querySelector("#testDescription").value = "";
+  document.querySelector("#testStatus").value = "Pass";
+  document.querySelector("#testPriority").value = "Low";
+
   testForm.style.display = "block";
 });
 
@@ -48,10 +56,30 @@ function displayTestCases() {
             <p>Status: ${testCase.status}</p>
             <p>Priority: ${testCase.priority}</p>
 
+            <button class="edit-btn" data-id = "${testCase.id}"> Edit </button>
+
             <button class="delete-btn" data-id ="${testCase.id}"> Delete </button>
         `;
 
     testCaseContainer.appendChild(testCaseElement);
+  });
+  const editButtons = document.querySelectorAll(".edit-btn");
+
+  editButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      const testId = button.dataset.id;
+      editingTestId = testId;
+
+      const testCase = testCases.find(function (testCase) {
+        return testCase.id === testId;
+      });
+      document.querySelector("#testName").value = testCase.name;
+      document.querySelector("#testDescription").value = testCase.description;
+      document.querySelector("#testStatus").value = testCase.status;
+      document.querySelector("#testPriority").value = testCase.priority;
+
+      testForm.style.display = "block";
+    });
   });
   const deleteButtons = document.querySelectorAll(".delete-btn");
 
@@ -81,13 +109,31 @@ saveTestBtn.addEventListener("click", function () {
   const testStatus = document.querySelector("#testStatus").value;
   const testPriority = document.querySelector("#testPriority").value;
 
-  const newTestCase = {
-    id: `TC00${testCases.length + 1}`,
-    name: testName,
-    description: testDescription,
-    status: testStatus,
-    priority: testPriority,
-  };
+  if (editingTestId !== null) {
+    const testCase = testCases.find(function (testCase) {
+      return testCase.id === editingTestId;
+    });
+    testCase.name = testName;
+    testCase.description = testDescription;
+    testCase.status = testStatus;
+    testCase.priority = testPriority;
+
+    editingTestId = null;
+  } else {
+    const newTestCase = {
+      id: `TC00${testCases.length + 1}`,
+      name: testName,
+      description: testDescription,
+      status: testStatus,
+      priority: testPriority,
+    };
+
+    testCases.push(newTestCase);
+  }
+
+  displayTestCases();
+
+  testForm.style.display = "none";
 
   testCases.push(newTestCase);
   displayTestCases();
