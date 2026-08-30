@@ -1,6 +1,21 @@
 let editingTestId = null;
 const addTestBtn = document.querySelector("#addTestBtn");
 const testForm = document.querySelector("#testForm");
+const searchInput = document.querySelector("#searchInput");
+
+searchInput.addEventListener("input", function () {
+  const searchText = searchInput.value.toLowerCase();
+
+  const filteredTestCases = testCases.filter(function (testCase) {
+    return (
+      testCase.id.toLowerCase().includes(searchText) ||
+      testCase.name.toLowerCase().includes(searchText) ||
+      testCase.description.toLowerCase().includes(searchText)
+    );
+  });
+
+  displayTestCases(filteredTestCases);
+});
 
 addTestBtn.addEventListener("click", function () {
   editingTestId = null;
@@ -38,12 +53,12 @@ const testCases = [
   },
 ];
 
-function displayTestCases() {
+function displayTestCases(casesToDisplay = testCases) {
   const testCaseContainer = document.querySelector("#testCases");
 
   testCaseContainer.innerHTML = "";
 
-  testCases.forEach(function (testCase) {
+  casesToDisplay.forEach(function (testCase) {
     const testCaseElement = document.createElement("div");
 
     testCaseElement.classList.add("test-case");
@@ -61,6 +76,49 @@ function displayTestCases() {
 
     testCaseContainer.appendChild(testCaseElement);
   });
+
+  addButtonEvents();
+
+  updateStatistics();
+
+  function addButtonEvents() {
+    const deleteButtons = document.querySelectorAll(".delete-btn");
+    const editButtons = document.querySelectorAll(".edit-btn");
+
+    deleteButtons.forEach(function (button) {
+      button.addEventListener("click", function () {
+        const testId = button.dataset.id;
+
+        const updatedTestCases = testCases.filter(function (testCase) {
+          return testCase.id !== testId;
+        });
+
+        testCases.length = 0;
+        testCases.push(...updatedTestCases);
+
+        displayTestCases();
+      });
+    });
+
+    editButtons.forEach(function (button) {
+      button.addEventListener("click", function () {
+        const testId = button.dataset.id;
+
+        editingTestId = testId;
+
+        const testCase = testCases.find(function (testCase) {
+          return testCase.id === testId;
+        });
+
+        document.querySelector("#testName").value = testCase.name;
+        document.querySelector("#testDescription").value = testCase.description;
+        document.querySelector("#testStatus").value = testCase.status;
+        document.querySelector("#testPriority").value = testCase.priority;
+
+        testForm.style.display = "block";
+      });
+    });
+  }
 
   function updateStatistics() {
     const total = testCases.length;
