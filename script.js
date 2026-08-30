@@ -2,6 +2,20 @@ let editingTestId = null;
 const addTestBtn = document.querySelector("#addTestBtn");
 const testForm = document.querySelector("#testForm");
 const searchInput = document.querySelector("#searchInput");
+const statusFilter = document.querySelector("#statusFilter");
+
+statusFilter.addEventListener("change", function () {
+  const selectedStatus = statusFilter.value;
+
+  if (selectedStatus === "all") {
+    displayTestCases();
+    return;
+  }
+  const filteredTestCases = testCases.filter(function (testCase) {
+    return testCase.status.toLowerCase() === selectedStatus;
+  });
+  displayTestCases(filteredTestCases);
+});
 
 searchInput.addEventListener("input", function () {
   const searchText = searchInput.value.toLowerCase();
@@ -53,6 +67,25 @@ const testCases = [
   },
 ];
 
+function filterTestCases() {
+  const searchText = searchInput.value.toLowerCase();
+  const selectedStatus = statusFilter.value;
+
+  const filteredTestCases = testCases.filter(function (testCase) {
+    const matchesSearch =
+      testCase.id.toLowerCase().includes(searchText) ||
+      testCase.name.toLowerCase().includes(searchText) ||
+      testCase.description.toLowerCase().includes(searchText);
+
+    const matchesStatus =
+      selectedStatus === "all" ||
+      testCase.status.toLowerCase() === selectedStatus;
+
+    return matchesSearch && matchesStatus;
+  });
+  displayTestCases(filteredTestCases);
+}
+
 function displayTestCases(casesToDisplay = testCases) {
   const testCaseContainer = document.querySelector("#testCases");
 
@@ -96,7 +129,7 @@ function displayTestCases(casesToDisplay = testCases) {
         testCases.length = 0;
         testCases.push(...updatedTestCases);
 
-        displayTestCases();
+        filterTestCases();
       });
     });
 
@@ -210,7 +243,7 @@ saveTestBtn.addEventListener("click", function () {
     testCases.push(newTestCase);
   }
 
-  displayTestCases();
+  filterTestCases();
 
   testForm.style.display = "none";
 
