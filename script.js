@@ -42,7 +42,7 @@ addTestBtn.addEventListener("click", function () {
   testForm.style.display = "block";
 });
 
-const testCases = [
+let testCases = [
   {
     id: "TC001",
     name: "Login with valid credentials",
@@ -66,6 +66,16 @@ const testCases = [
     priority: "Medium",
   },
 ];
+
+const savedTestCases = localStorage.getItem("testCases");
+
+if (savedTestCases) {
+  testCases = JSON.parse(savedTestCases);
+}
+
+function saveTestCases() {
+  localStorage.setItem("testCases", JSON.stringify(testCases));
+}
 
 function filterTestCases() {
   const searchText = searchInput.value.toLowerCase();
@@ -128,6 +138,7 @@ function displayTestCases(casesToDisplay = testCases) {
 
         testCases.length = 0;
         testCases.push(...updatedTestCases);
+        saveTestCases();
 
         filterTestCases();
       });
@@ -242,6 +253,7 @@ saveTestBtn.addEventListener("click", function () {
 
     testCases.push(newTestCase);
   }
+  saveTestCases();
 
   filterTestCases();
 
