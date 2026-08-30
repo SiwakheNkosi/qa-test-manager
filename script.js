@@ -109,7 +109,12 @@ function displayTestCases(casesToDisplay = testCases) {
     testCaseElement.innerHTML = `
             <h2>${testCase.id} - ${testCase.name}</h2>
             <p>${testCase.description}</p>
-            <p>Status: ${testCase.status}</p>
+            <p>
+    Status:
+    <span class="status ${testCase.status.toLowerCase()}">
+        ${testCase.status}
+    </span>
+</p>
             <p>Priority: ${testCase.priority}</p>
 
             <button class="edit-btn" data-id = "${testCase.id}"> Edit </button>
