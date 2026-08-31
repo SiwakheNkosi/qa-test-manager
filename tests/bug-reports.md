@@ -17,19 +17,25 @@
 **Steps to Reproduce:**
 
 1. Open the QA Test Case Manager.
-2. Enter `"password"` in the Search Test Cases field.
-3. Select `"Failed"` from the status filter.
+2. Enter "password" in the Search Test Cases field.
+3. Select "Failed" from the status filter.
 
 **Expected Result:**
 
-No test cases should be displayed when there are no test cases that both contain `"password"` and have a status of `"Fail"`.
+No test cases should be displayed when there are no test cases that both contain "password" and have a status of "Fail".
 
 **Actual Result:**
 
-A test case with status `"Fail"` is displayed even though it does not contain `"password"`.
+A test case with status "Fail" is displayed even though it does not contain "password".
 
-**Status:** Open
+**Status:** Resolved
 
 **Notes:**
 
 The search and status filter appear to be working independently instead of applying both conditions together.
+
+**Resolution:**
+
+Updated the filtering logic so that search criteria and status criteria are applied together.
+
+**Retest Result:** PASS

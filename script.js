@@ -5,30 +5,11 @@ const searchInput = document.querySelector("#searchInput");
 const statusFilter = document.querySelector("#statusFilter");
 
 statusFilter.addEventListener("change", function () {
-  const selectedStatus = statusFilter.value;
-
-  if (selectedStatus === "all") {
-    displayTestCases();
-    return;
-  }
-  const filteredTestCases = testCases.filter(function (testCase) {
-    return testCase.status.toLowerCase() === selectedStatus;
-  });
-  displayTestCases(filteredTestCases);
+  filterTestCases();
 });
 
 searchInput.addEventListener("input", function () {
-  const searchText = searchInput.value.toLowerCase();
-
-  const filteredTestCases = testCases.filter(function (testCase) {
-    return (
-      testCase.id.toLowerCase().includes(searchText) ||
-      testCase.name.toLowerCase().includes(searchText) ||
-      testCase.description.toLowerCase().includes(searchText)
-    );
-  });
-
-  displayTestCases(filteredTestCases);
+  filterTestCases();
 });
 
 addTestBtn.addEventListener("click", function () {

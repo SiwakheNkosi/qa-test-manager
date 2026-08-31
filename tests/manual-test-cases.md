@@ -287,7 +287,9 @@ Pass
 No test case should appear
 
 **Actual Result:**
-A test case with the status "Fail" appear but does not contain a value "password"
+No test cases were displayed because no test case matched both the search text and selected status.
 
 **Status:**
-Fail
+Pass
+
+**\*Previous result** FAIL - BUG-001
