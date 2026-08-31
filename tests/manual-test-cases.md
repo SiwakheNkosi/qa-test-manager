@@ -19,10 +19,10 @@
 The new test case should appear once in the test case list.
 
 **Actual Result:**
-Not tested yet
+The new test case appeared once in the list
 
 **Status:**
-Not Tested
+Pass
 
 ---
 
@@ -30,7 +30,7 @@ Not Tested
 
 **Feature:** Adding Test Case on a clear form
 
-**Precondition:** Application is open.
+**Precondition:** Atleast one test case created
 
 **Steps:**
 
@@ -42,10 +42,10 @@ Not Tested
 The form should be blank and not include previous test case information.
 
 **Actual Result:**
-Not tested yet
+A blank form opens
 
 **Status:**
-Not Tested
+Pass
 
 ---
 
@@ -53,7 +53,7 @@ Not Tested
 
 **Feature:** Edit button
 
-**Precondition:** Application is open.
+**Precondition:** Atleast one test case created
 
 **Steps:**
 
@@ -66,10 +66,12 @@ Not Tested
 Only the selected test case changes to edited version.
 
 **Actual Result:**
-Not tested yet
+The selected test case has been edited
 
 **Status:**
-Not Tested
+Pass
+
+---
 
 ## TC004 - Delete a Test Case
 
@@ -85,10 +87,10 @@ Not Tested
 Only the selected test case should be removed.
 
 **Actual Result:**
-Not tested yet.
+Selected test case is removed
 
 **Status:**
-Not Tested
+Pass
 
 ---
 
@@ -107,10 +109,10 @@ Not Tested
 Only matching test cases should be displayed.
 
 **Actual Result:**
-Not tested yet.
+Only test cases that match what i typed appeared
 
 **Status:**
-Not Tested
+Pass
 
 ---
 
@@ -128,10 +130,10 @@ Not Tested
 The matching test case should be displayed.
 
 **Actual Result:**
-Not tested yet.
+Matching test case is displayed
 
 **Status:**
-Not Tested
+Pass
 
 ---
 
@@ -150,10 +152,10 @@ Not Tested
 Only failed test cases should be displayed.
 
 **Actual Result:**
-Not tested yet.
+Only failed test cases appeared
 
 **Status:**
-Not Tested
+Pass
 
 ---
 
@@ -172,10 +174,10 @@ Not Tested
 Only test cases matching both the search text and selected status should be displayed.
 
 **Actual Result:**
-Not tested yet.
+Test cases that matched both values appeared
 
 **Status:**
-Not Tested
+Pass
 
 ---
 
@@ -194,10 +196,10 @@ Not Tested
 The newly added test case should still be displayed.
 
 **Actual Result:**
-Not tested yet.
+The new test case is still displayed after browser refresh
 
 **Status:**
-Not Tested
+Pass
 
 ---
 
@@ -216,10 +218,10 @@ Not Tested
 The deleted test case should not reappear.
 
 **Actual Result:**
-Not tested yet.
+Deleted test case did not reappear
 
 **Status:**
-Not Tested
+Pass
 
 ---
 
@@ -239,10 +241,10 @@ Not Tested
 Total should increase by 1 and Passed should increase by 1.
 
 **Actual Result:**
-Not tested yet.
+Both statistics have increased by 1
 
 **Status:**
-Not Tested
+Pass
 
 ---
 
@@ -263,7 +265,29 @@ Not Tested
 Failed should decrease by 1 and Passed should increase by 1.
 
 **Actual Result:**
-Not tested yet.
+The Failed statistics decreased by 1 and Passed increased by 1
 
 **Status:**
-Not Tested
+Pass
+
+---
+
+## TC013 - Search and Status Filter Return No Results When Criteria Do Not Match
+
+**Feature:** Search test cases and status filter
+
+**Precondition:** Multiple test cases exist
+
+**Steps:**
+
+1. Enter "password" in the Search Test Cases field.
+2. Select "Failed" from the status filter.
+
+**Expected Result:**
+No test case should appear
+
+**Actual Result:**
+A test case with the status "Fail" appear but does not contain a value "password"
+
+**Status:**
+Fail
