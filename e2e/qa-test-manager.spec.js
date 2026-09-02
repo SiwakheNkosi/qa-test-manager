@@ -1,7 +1,7 @@
 const { test, expect } = require("@playwright/test");
 
 test("user can add a new test case", async ({ page }) => {
-  await page.goto("http:127.0.0.1:8080");
+  await page.goto("http://127.0.0.1:8080");
   await page.locator("#addTestBtn").click();
   await page.locator("#testName").fill("Login with empty password");
   await page
