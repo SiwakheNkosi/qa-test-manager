@@ -4,6 +4,10 @@ A web-based **QA Test Case Management application** built to demonstrate my prac
 
 The application allows users to create and manage test cases while also serving as a project where I can practice both **manual testing and automated end-to-end testing**.
 
+## Application Preview
+
+![QA Test Case Manager Dashboard](assets/qa-test-manager-dashboard.png)
+
 ## Project Purpose
 
 I created this project as part of my journey into **Software Testing and QA Automation**.
@@ -122,7 +126,13 @@ This provides practical experience with automated testing in a CI/CD environment
 
 The GitHub Actions workflow is currently passing successfully, confirming that the automated test suite can run independently in a CI environment.
 
-## Technologies Used
+#### CI Test Results
+
+The Playwright test suite runs automatically through GitHub Actions when changes are pushed to the repository.
+
+![GitHub Actions Playwright Tests](assets/github-actions-tests.png)
+
+# Technologies Used
 
 - **HTML** — Application structure
 - **CSS** — Application styling
