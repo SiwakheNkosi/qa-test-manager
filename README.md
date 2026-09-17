@@ -4,6 +4,10 @@ A web-based **QA Test Case Management application** built to demonstrate my prac
 
 The application allows users to create and manage test cases while also serving as a project where I can practice both **manual testing and automated end-to-end testing**.
 
+## Live Demo
+
+[Open the QA Test Case Manager](https://siwakhenkosi.github.io/qa-test-manager/)
+
 ## Application Preview
 
 ![QA Test Case Manager Dashboard](assets/qa-test-manager-dashboard.png)
