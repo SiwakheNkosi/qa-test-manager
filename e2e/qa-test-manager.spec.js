@@ -114,3 +114,37 @@ test("user can filter test cases by status", async ({ page }) => {
   await page.locator("#statusFilter").selectOption("fail");
   await expect(page.locator("#testCases")).toContainText("fail");
 });
+
+//TC013
+
+test("search and status filter return no results when criteria do not match", async ({
+  page,
+}) => {
+  await page.locator("#addTestBtn").click();
+
+  await page.locator("#testName").fill("Export customer report");
+  await page
+    .locator("#testDescription")
+    .fill("Verify user can export a customer report");
+  await page.locator("#testStatus").selectOption("Pass");
+  await page.locator("#testPriority").selectOption("Medium");
+
+  await page.locator("#saveTestBtn").click();
+
+  await page.locator("#addTestBtn").click();
+
+  await page.locator("#testName").fill("Invalid username");
+  await page
+    .locator("#testDescription")
+    .fill("Verify invalid username is rejected");
+  await page.locator("#testStatus").selectOption("Fail");
+  await page.locator("#testPriority").selectOption("High");
+
+  await page.locator("#saveTestBtn").click();
+
+  await page.locator("#searchInput").fill("customer report");
+
+  await page.locator("#statusFilter").selectOption("fail");
+
+  await expect(page.locator(".test-case")).toHaveCount(0);
+});
